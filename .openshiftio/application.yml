@@ -1,7 +1,7 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
-  name: angular-front-app
+  name: angular-template
   annotations:
     iconClass: icon-jboss
     tags: nodejs, angular, web app
@@ -16,7 +16,7 @@ parameters:
   - name: SOURCE_REPOSITORY_REF
     description: The branch name for the application
     displayName: Source Branch
-    value: master
+    value: main
     required: true
   - name: SOURCE_REPOSITORY_DIR
     description: The location within the source repo of the application
@@ -31,7 +31,7 @@ parameters:
   - name: APPLICATION_NAME
     description: The name for the application
     displayName: Name
-    value: angular-frond-app
+    value: angular-front-app
     required: false
 objects:
 - apiVersion: v1
@@ -94,7 +94,7 @@ objects:
             value: ${OUTPUT_DIR}
         from:
           kind: ImageStreamTag
-          name: ${APPLICATION_NAME}-builder-runtime:latest
+          name: ${APPLICATION_NAME}-runtime:latest
         incremental: true
       type: Source
     triggers:
