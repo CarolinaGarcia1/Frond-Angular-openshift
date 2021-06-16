@@ -1,7 +1,7 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
-  name: angular-frond-app
+  name: angular-front-app
   annotations:
     iconClass: icon-jboss
     tags: nodejs, angular, web app
@@ -51,7 +51,7 @@ objects:
 - apiVersion: v1
   kind: ImageStream
   metadata:
-    name: web-app-builder-runtime
+    name: ${APPLICATION_NAME}-builder-runtime
   spec:
     tags:
     - name: latest
@@ -94,7 +94,7 @@ objects:
             value: ${OUTPUT_DIR}
         from:
           kind: ImageStreamTag
-          name: web-app-builder-runtime:latest
+          name: ${APPLICATION_NAME}-builder-runtime:latest
         incremental: true
       type: Source
     triggers:
