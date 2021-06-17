@@ -1,7 +1,7 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
-  name: angular-template
+  name: angular-web-app
   annotations:
     iconClass: icon-jboss
     tags: nodejs, angular, web app
@@ -26,12 +26,12 @@ parameters:
   - name: OUTPUT_DIR
     description: The location of the compiled static files from your web apps builder
     displayName: Output Directory
-    value: build
+    value: dist/angular-tour-of-heroes
     required: false
   - name: APPLICATION_NAME
     description: The name for the application
     displayName: Name
-    value: angular-front-app
+    value: angular-web-app
     required: false
 objects:
 - apiVersion: v1
@@ -51,12 +51,13 @@ objects:
 - apiVersion: v1
   kind: ImageStream
   metadata:
-    name: ${APPLICATION_NAME}-builder-runtime
+    name: web-app-builder-runtime
   spec:
     tags:
     - name: latest
       from:
         kind: ImageStreamTag
+        namespace: app-openshift-Angular
         name: 'nodejs:14-ubi7'
 - apiVersion: v1
   kind: ImageStream
@@ -67,6 +68,7 @@ objects:
     - name: latest
       from:
         kind: ImageStreamTag
+        namespace: app-openshift-Angular
         name: 'nginx:1.16'
 - apiVersion: v1
   kind: BuildConfig
@@ -94,7 +96,7 @@ objects:
             value: ${OUTPUT_DIR}
         from:
           kind: ImageStreamTag
-          name: ${APPLICATION_NAME}-runtime:latest
+          name: web-app-builder-runtime:latest
         incremental: true
       type: Source
     triggers:
