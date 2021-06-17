@@ -57,7 +57,7 @@ objects:
     - name: latest
       from:
         kind: ImageStreamTag
-        namespace: app-openshift-Angular
+        namespace: openshift
         name: 'nodejs:14-ubi7'
 - apiVersion: v1
   kind: ImageStream
@@ -68,7 +68,7 @@ objects:
     - name: latest
       from:
         kind: ImageStreamTag
-        namespace: app-openshift-Angular
+        namespace: openshift
         name: 'nginx:1.16'
 - apiVersion: v1
   kind: BuildConfig
