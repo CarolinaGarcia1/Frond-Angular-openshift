@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { environment } from '../environments/environment'
 
 
 @Component({
@@ -9,6 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AppComponent {
   title = 'Concession Kiosk - Menu!';
+  var1 =  environment.production;
   Form = new FormGroup({
     hotdog: new FormControl(''),
     hamburger: new FormControl(''),
